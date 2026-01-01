@@ -1,0 +1,23 @@
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
+
+DATABASE_URL = "sqlite:///habits.db"
+
+CHART_WIDTH = 14
+CHART_HEIGHT = 7
+CHART_DPI = 120
+
+MODEL_WINDOW_SIZE = 3
+RF_ESTIMATORS = 100
+RF_RANDOM_STATE = 42
+
+FEEDBACK_DAYS_AHEAD = 2
+
+SLEEP_MIN = 0
+SLEEP_MAX = 24
+WATER_MIN = 0
+WATER_MAX = 10
+MOOD_MIN = 1
+MOOD_MAX = 5

@@ -1,0 +1,138 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+}
+
+h1{
+    text-align: center;
+}
+
+.section{
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: white;
+}
+
+input, button{
+    padding: 10px;
+    margin: 5px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button{
+    cursor: pointer;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button:hover{
+    background-color: #45a049;
+}
+
+img{
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    margin-top: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: white;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#sleepChart, #waterChart, #moodChart{
+    min-height: 300px;
+    object-fit: contain;
+}
+
+#feedback{
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    border-left: 4px solid white;
+}
+
+#feedback p {
+    margin: 10px 0;
+    padding: 10px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    line-height: 1.5;
+}
+
+label{
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+    border-left: 4px solid #c62828;
+    display: none;
+}
+
+.field-error {
+    color: #c62828;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    min-height: 20px;
+}
+
+input.error {
+    border: 2px solid #c62828;
+    background-color: #ffebee;
+}
+
+.success-message {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+    border-left: 4px solid #2e7d32;
+    display: none;
+}
+
+.form-feedback {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-feedback.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+.form-feedback.error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+#feedback p:nth-child(odd) {
+    background: #f0f7ff;
+}
+
