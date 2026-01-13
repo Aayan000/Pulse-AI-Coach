@@ -1,9 +1,14 @@
 import sqlite3
 from datetime import datetime, timedelta
 import random
+from pathlib import Path
+
+# Compute project base directory so the script works when executed from tests/
+BASE_DIR = Path(__file__).resolve().parents[1]
+db_path = BASE_DIR / "habits.db"
 
 # Create test data
-conn = sqlite3.connect('habits.db')
+conn = sqlite3.connect(str(db_path))
 cursor = conn.cursor()
 
 # Create table if not exists
@@ -30,8 +35,8 @@ for i in range(7):
     cursor.execute("""
         INSERT INTO habits (sleep_hours, water_litres, mood, timestamp)
         VALUES (?, ?, ?, ?)
-    """, (sleep, water, mood, date))
+    """, (sleep, water, mood, date))    
 
 conn.commit()
 conn.close()
-print("✅ Created 7 days of test data in habits.db")
+print(f"✅ Created 7 days of test data in {db_path}")

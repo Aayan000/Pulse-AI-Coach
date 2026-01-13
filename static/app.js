@@ -89,34 +89,41 @@ async function submitEntry(){
             })
         });
 
-        const data = await response.json();
-
+        // handle non-JSON or error responses gracefully
         if (!response.ok) {
-            if (data.detail) {
-                if (Array.isArray(data.detail)) {
-                    data.detail.forEach(error => {
-                        const field = error.loc[1];
-                        showError(`${field}Error`, error.msg);
-                    });
-                }
-
-                else{
-                    showFormError(data.detail || 'Server error occurred')
-                }
+            let data = null;
+            try {
+                data = await response.json();
+            } catch (e) {
+                const text = await response.text().catch(() => null);
+                console.error('Server error (non-JSON):', text || e);
+                showFormError(text || 'Server error occurred');
+                return;
             }
 
-            else{
+            if (data && data.detail) {
+                if (Array.isArray(data.detail)) {
+                    data.detail.forEach(error => {
+                        const field = error.loc && error.loc[1] ? error.loc[1] : null;
+                        if (field) showError(`${field}Error`, error.msg);
+                    });
+                } else {
+                    showFormError(data.detail || 'Server error occurred')
+                }
+            } else {
                 showFormError('Failed to submit entry. Please try again')
             }
 
             return;
         }
 
-        if (data.feedback){
+        // parse successful JSON response
+        const data = await response.json();
+
+        if (data && data.feedback){
             document.getElementById("feedback").innerHTML = 
                 data.feedback.map(f => `<p>${f}</p>`).join("");
-            
-                showFormSuccess('Entry submitted successfully')
+            showFormSuccess('Entry submitted successfully')
         }
 
         document.getElementById("sleep").value = '';
@@ -192,9 +199,10 @@ function showFormSuccess(message){
     if(!successDiv){
         successDiv = document.createElement('div');
         successDiv.id = 'formSuccess';
-        successDiv.className = 'seccess-message';
-        const form = document.querySelector('.section');
-        form.insertBefore(successDiv, form.firstChild);
+        successDiv.className = 'success-message';
+        // insert into the Add Daily Entry card (left panel) if present
+        const container = document.querySelector('.left-panel .card') || document.querySelector('.left-panel') || document.body;
+        container.insertBefore(successDiv, container.firstChild);
     }
 
     successDiv.textContent = message;
@@ -221,7 +229,7 @@ function clearErrors(){
 
     const successDiv = document.getElementById('formSuccess');
     if(successDiv){
-        successDiv.style.display = 'none;'
+        successDiv.style.display = 'none'
     }
 }
 
